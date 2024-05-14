@@ -190,9 +190,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     _buildMenuItemCard(
                         'assets/icons/hotdog.png', 'Hot Dog', '\$15'),
                     _buildMenuItemCard(
-                        'assets/icons/kentang.png', 'Fries', '\$18'),
+                        'assets/icons/bacon.png', 'bacon', '\$18'),
                     _buildMenuItemCard(
-                        'assets/icons/drink.png', 'Drinks', '\$9'),
+                        'assets/icons/vanila.png', 'Vanila Ice', '\$9'),
+                    _buildMenuItemCard('assets/icons/drink.png', 'Cola', '\$9'),
                   ],
                 ),
               ),
@@ -204,6 +205,36 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed, // Atur tipe menjadi fixed
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.location_on),
+            label: 'Location',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
+            label: 'My Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Me',
+          ),
+        ],
+        unselectedItemColor:
+            Colors.grey, // Warna abu untuk ikon yang tidak dipilih
+        selectedItemColor: Colors.pink, // Warna pink untuk ikon yang dipilih
+        onTap: (int index) {
+          // Handle navigation based on index
+          // Misalnya, jika index = 0, buka halaman lokasi
+          // Jika index = 1, buka halaman utama
+          // Dan seterusnya...
+        },
       ),
     );
   }
