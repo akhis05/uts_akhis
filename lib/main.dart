@@ -201,7 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     _buildMenuItemCard(
                         'assets/icons/hotdog.png', 'Hot Dog', '\$15'),
                     _buildMenuItemCard(
-                        'assets/icons/bacon.png', 'bacon', '\$18'),
+                        'assets/icons/bawang.png', 'bacon', '\$18'),
                     _buildMenuItemCard(
                         'assets/icons/vanila.png', 'Vanila Ice', '\$9'),
                     _buildMenuItemCard('assets/icons/drink.png', 'Cola', '\$9'),
