@@ -63,6 +63,7 @@ flutter:
   assets:
     - assets/icons/1.png
     - assets/icons/burger.png
+    - assets/icons/burgergedi.png
     - assets/icons/donat.png
     - assets/icons/drink.png
     - assets/icons/kentang.png
@@ -70,6 +71,8 @@ flutter:
     - assets/icons/ice.png
     - assets/icons/bacon.png
     - assets/icons/vanila.png
+    - assets/icons/bawang.png
+    - assets/icons/keju.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
