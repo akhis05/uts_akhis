@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fodee_mobile_app/halaman2.dart';
 
 void main() {
   runApp(const MyApp());
@@ -159,8 +160,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    _buildMenuItemCard(
-                        'assets/icons/burger.png', 'Burger', '\$10'),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HalamanDua()),
+                        );
+                      },
+                      child: Container(
+                        child: _buildMenuItemCard(
+                            'assets/icons/burger.png', 'Burger', '\$10'),
+                      ),
+                    ),
                     _buildMenuItemCard(
                         'assets/icons/kentang.png', 'Fries', '\$8'),
                     _buildMenuItemCard(
