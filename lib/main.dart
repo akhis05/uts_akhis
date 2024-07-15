@@ -5,6 +5,7 @@ import 'package:fodee_mobile_app/halaman2.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
+  //tes
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
       url: "https://jwvntttldarvgadaupci.supabase.co",
