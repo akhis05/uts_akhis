@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class MenuService {
   final Dio _dio = Dio();
 
-  final String _baseUrl = 'https://jwvntttldarvgadaupci.supabase.co/rest/v1/';
+  final String _baseUrl = "https://jwvntttldarvgadaupci.supabase.co/rest/v1/";
   final String _apiKey =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3dm50dHRsZGFydmdhZGF1cGNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjA5Nzk2MjgsImV4cCI6MjAzNjU1NTYyOH0.m7a7jpXmAb0jwGsJ8vu0PFuMQVV0Mryry2rSfYjsraw';
 

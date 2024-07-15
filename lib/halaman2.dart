@@ -353,6 +353,7 @@ class HalamanDua extends StatelessWidget {
 
   Widget _buildAddToCartCard() {
     return Card(
+      color: Colors.redAccent,
       elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
