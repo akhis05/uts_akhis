@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:fodee_mobile_app/bottom_navbar.dart';
+import 'package:fodee_mobile_app/controller/menu_controller.dart';
 import 'package:fodee_mobile_app/halaman2.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+      url: "https://jwvntttldarvgadaupci.supabase.co",
+      anonKey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp3dm50dHRsZGFydmdhZGF1cGNpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjA5Nzk2MjgsImV4cCI6MjAzNjU1NTYyOH0.m7a7jpXmAb0jwGsJ8vu0PFuMQVV0Mryry2rSfYjsraw");
   runApp(const MyApp());
 }
 
@@ -17,28 +25,46 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MainPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _MainPageState extends State<MainPage> {
+  int _currentIndex = 0;
 
-  void _incrementCounter() {
+  final List<Widget> _children = [
+    const HomePage(),
+    MenuPage(),
+  ];
+
+  void onTappedBar(int index) {
     setState(() {
-      _counter++;
+      _currentIndex = index;
     });
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _children[_currentIndex],
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: onTappedBar,
+      ),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -213,39 +239,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Atur tipe menjadi fixed
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.location_on),
-            label: 'Location',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'My Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Me',
-          ),
-        ],
-        unselectedItemColor:
-            Colors.grey, // Warna abu untuk ikon yang tidak dipilih
-        selectedItemColor: Colors.pink, // Warna pink untuk ikon yang dipilih
-        onTap: (int index) {
-          // Handle navigation based on index
-          // Misalnya, jika index = 0, buka halaman lokasi
-          // Jika index = 1, buka halaman utama
-          // Dan seterusnya...
-        },
       ),
     );
   }
@@ -277,6 +273,53 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class MenuPage extends StatefulWidget {
+  MenuPage({Key? key}) : super(key: key);
+
+  @override
+  State<MenuPage> createState() => _MenuPageState();
+}
+
+class _MenuPageState extends State<MenuPage> {
+  final MenuProductController _menuController = MenuProductController();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchMenus();
+  }
+
+  Future<void> _fetchMenus() async {
+    await _menuController.getMenus();
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Menu Pages'),
+      ),
+      body: _menuController.menus == null
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: _menuController.menus!.length,
+              itemBuilder: (context, index) {
+                final menu = _menuController.menus![index];
+                return Card(
+                  child: ListTile(
+                    leading: Image.asset("menu.image_url",
+                        width: 50, height: 50, fit: BoxFit.cover),
+                    title: Text(menu.title),
+                    subtitle: Text('Price: ${menu.price}'),
+                  ),
+                );
+              },
+            ),
     );
   }
 }
