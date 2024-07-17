@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fodee_mobile_app/bottom_navbar.dart';
 import 'package:fodee_mobile_app/controller/menu_controller.dart';
+import 'package:fodee_mobile_app/drinks_menu.dart';
+import 'package:fodee_mobile_app/fries_menu.dart';
 import 'package:fodee_mobile_app/halaman2.dart';
+import 'package:fodee_mobile_app/salad_menu.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -86,9 +89,9 @@ class HomePage extends StatelessWidget {
                     children: [
                       Image.asset('assets/icons/1.png', width: 60, height: 60),
                       const SizedBox(width: 16),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             'Welcome back, Pin!',
                             style: TextStyle(
@@ -115,11 +118,11 @@ class HomePage extends StatelessWidget {
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: TextField(
+                      child: const TextField(
                         decoration: InputDecoration(
                           hintText: 'Search...',
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.all(12),
+                          contentPadding: EdgeInsets.all(12),
                         ),
                       ),
                     ),
@@ -150,15 +153,15 @@ class HomePage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(24.0),
                   child: Row(
                     children: [
                       Icon(Icons.donut_large, size: 60, color: Colors.brown),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             'Free Donut!',
                             style: TextStyle(
@@ -190,7 +193,8 @@ class HomePage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => HalamanDua()),
+                          MaterialPageRoute(
+                              builder: (context) => const HalamanDua()),
                         );
                       },
                       child: Container(
@@ -198,23 +202,56 @@ class HomePage extends StatelessWidget {
                             'assets/icons/burger.png', 'Burger', '\$10'),
                       ),
                     ),
-                    _buildMenuItemCard(
-                        'assets/icons/kentang.png', 'Fries', '\$8'),
-                    _buildMenuItemCard(
-                        'assets/icons/drink.png', 'Drinks', '\$12'),
-                    _buildMenuItemCard(
-                        'assets/icons/burger.png', 'Salad', '\$6'),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const FriesPage()),
+                        );
+                      },
+                      child: Container(
+                        child: _buildMenuItemCard(
+                            'assets/icons/kentang.png', 'Fries', '\$8'),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DrinkPage()),
+                        );
+                      },
+                      child: Container(
+                        child: _buildMenuItemCard(
+                            'assets/icons/drink.png', 'Drinks', '\$12'),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SaladPage()),
+                        );
+                      },
+                      child: Container(
+                        child: _buildMenuItemCard(
+                            'assets/icons/burger.png', 'Salad', '\$13'),
+                      ),
+                    ),
                   ],
                 ),
               ),
               const SizedBox(height: 20),
-              Row(
+              const Row(
                 children: [
-                  const Text(
+                  Text(
                     'Best Offers',
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(width: 10),
+                  SizedBox(width: 10),
                   Icon(Icons.favorite, color: Colors.red),
                 ],
               ),
@@ -302,20 +339,20 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Menu Pages'),
+        title: const Text('Cart Pages'),
       ),
       body: _menuController.menus == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: _menuController.menus!.length,
               itemBuilder: (context, index) {
                 final menu = _menuController.menus![index];
                 return Card(
                   child: ListTile(
-                    leading: Image.asset("menu.image_url",
+                    leading: Image.asset(menu.imageUrl,
                         width: 50, height: 50, fit: BoxFit.cover),
                     title: Text(menu.title),
-                    subtitle: Text('Price: ${menu.price}'),
+                    subtitle: Text('Price: \$${menu.price}'),
                   ),
                 );
               },

@@ -1,80 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:fodee_mobile_app/controller/menu_controller.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SaladPage extends StatefulWidget {
+  const SaladPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HalamanSatu(),
-    );
-  }
+  State<SaladPage> createState() => _SaladPageState();
 }
 
-class HalamanSatu extends StatefulWidget {
-  const HalamanSatu({super.key});
-
-  @override
-  State<HalamanSatu> createState() => _HalamanSatuState();
-}
-
-class _HalamanSatuState extends State<HalamanSatu> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Halaman Satu'),
-      ),
-      body: Center(
-        child: InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HalamanDua()),
-            );
-          },
-          child: Container(
-            child:
-                _buildMenuItemCard('assets/icons/burger.png', 'Burger', '\$10'),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMenuItemCard(String iconPath, String title, String price) {
-    return Card(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Image.asset(iconPath),
-          Text(title),
-          Text(price),
-        ],
-      ),
-    );
-  }
-}
-
-class HalamanDua extends StatefulWidget {
-  const HalamanDua({super.key});
-
-  @override
-  State<HalamanDua> createState() => _HalamanDuaState();
-}
-
-class _HalamanDuaState extends State<HalamanDua> {
+class _SaladPageState extends State<SaladPage> {
   final MenuProductController _menuController = MenuProductController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Halaman Dua'),
+        title: const Text('Salad Page'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -126,7 +66,7 @@ class _HalamanDuaState extends State<HalamanDua> {
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  'Mr. Cheezy',
+                  'Salad',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -145,7 +85,7 @@ class _HalamanDuaState extends State<HalamanDua> {
             padding: const EdgeInsets.all(8.0),
             width: double.infinity,
             child: Image.asset(
-              'assets/icons/burgergedi.png',
+              'assets/icons/burger.png',
               fit: BoxFit.cover,
             ),
           ),
@@ -356,7 +296,7 @@ class _HalamanDuaState extends State<HalamanDua> {
             ),
             const SizedBox(height: 10),
             const Text(
-              '\$27.45',
+              '\$13',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -379,9 +319,9 @@ class _HalamanDuaState extends State<HalamanDua> {
       child: GestureDetector(
         onTap: () {
           final newMenuData = {
-            'title': 'Mr Cheezy',
-            'price': 27,
-            'image_url': 'assets/icons/burgergedi.png'
+            'title': 'Salad',
+            'price': 13,
+            'image_url': 'assets/icons/burger.png'
           };
           _menuController.addMenu(context, newMenuData);
         },
@@ -399,7 +339,7 @@ class _HalamanDuaState extends State<HalamanDua> {
               ),
               SizedBox(height: 10),
               Text(
-                '\$27.45',
+                '\$13',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -428,7 +368,7 @@ class _HalamanDuaState extends State<HalamanDua> {
     );
   }
 
-  Widget _buildNutrientOptions() {
+    Widget _buildNutrientOptions() {
     // Ini adalah widget _buildNutrientOptions yang sebelumnya hilang
     // Anda dapat menambahkan konten sesuai kebutuhan
     return Container();

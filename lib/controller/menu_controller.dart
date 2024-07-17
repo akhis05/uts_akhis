@@ -11,7 +11,6 @@ class MenuProductController {
 
   Future<void> getMenus() async {
     try {
-      print('Fetching menus...');
       final response = await _menuService.getMenu();
       if (response.statusCode == 200) {
         print('Menus fetched successfully');
@@ -24,6 +23,31 @@ class MenuProductController {
       }
     } catch (e) {
       debugPrint('Error: $e');
+    }
+  }
+
+    void addMenu(
+      BuildContext context, Map<String, dynamic> newMenuData) async {
+    try {
+      final response = await _menuService.addMenu(newMenuData);
+      if (response.statusCode == 201) {
+        getMenus();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Menu added successfully'),
+          ),
+        );
+
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Menu added failed'),
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint('Error $e');
+    } finally {
     }
   }
 }

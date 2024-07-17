@@ -19,21 +19,21 @@ class MenuService {
     return response;
   }
 
-  // Future<Response> addReport(Map<String, dynamic> newReportData) async {
-  //   var baseUrl = 'https://kmcrslkjoptlavxsmeti.supabase.co/rest/v1/reports';
-  //   final response = await _dio.post(baseUrl,
-  //       data: newReportData,
-  //       options: Options(
-  //         headers: {
-  //           'apikey': _apiKey,
-  //           'Authorization': 'Bearer $_apiKey',
-  //           'Content-Type': 'application/json',
-  //           'Prefer': 'return=representation'
-  //         },
-  //       ));
+  Future<Response> addMenu(Map<String, dynamic> newMenuData) async {
+    var baseUrl = 'https://jwvntttldarvgadaupci.supabase.co/rest/v1/menu';
+    final response = await _dio.post(baseUrl,
+        data: newMenuData,
+        options: Options(
+          headers: {
+            'apikey': _apiKey,
+            'Authorization': 'Bearer $_apiKey',
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+          },
+        ));
 
-  //   return response;
-  // }
+    return response;
+  }
 
   // Future<Response> deleteReport(int reportId) async {
   //   var baseUrl = '${_baseUrl}reports?id=eq.$reportId';
